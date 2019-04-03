@@ -4,7 +4,7 @@ export default {
         white: '#fff',
         primary: '#FF7070',
         darkPrimary: '#BC4141',
-        gray: '#F9F9F9',
+        gray: '#FBFBFD',
         darkGray: "#9E9E9E"
     },
     fontWeight: {

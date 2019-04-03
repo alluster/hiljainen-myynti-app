@@ -1,14 +1,16 @@
 import React from 'react';
 import { H1 } from 'components/Typography';
 import Nav from 'components/Nav';
-import Wrapper from 'components/Wrapper';
+import Container from 'components/Container';
+import Footer from 'components/Footer';
 
 const Ostotoimeksianto = () => 
 	<div>
 			<Nav transparent/>  
-			<Wrapper>
+			<Container>
 				<H1>Ostotoimeksianto</H1>
-			</Wrapper>
+			</Container>
+      <Footer />
 	</div>
       
 export default Ostotoimeksianto;

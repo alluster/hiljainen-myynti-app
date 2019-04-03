@@ -3,11 +3,25 @@ import styled, {
 } from 'styled-components';
 
 const Font = styled.h1 `
-font-family: 'Nunito', sans-serif;
-word-break: initial ;
-hyphens: auto;
+    font-family: 'Nunito', sans-serif;
+    word-break: initial ;
+    hyphens: auto;
 
-
+	${props => {
+		if (props.center) return css`
+			text-align: center;
+		`;
+    }};
+    ${props => {
+		if (props.lineHeight) return css`
+			line-height: ${props => props.lineHeight} !important;
+		`;
+	}};
+	${props => {
+		if (props.right) return css`
+			text-align: right;
+		`;
+	}};
     ${props => {
         if (props.thin) return css`
             font-weight: ${props => props.theme.fontWeight.thin};
@@ -64,8 +78,7 @@ export const P = styled.p `
     }
 `;
 
-export const H1 = styled(Font)
-`
+export const H1 = styled(Font)`
     font-size: ${props => props.theme.fontSize.h1};
     letter-spacing: 2px;
     line-height: ${props => props.theme.fontSize.h1};
@@ -79,8 +92,7 @@ export const H1 = styled(Font)
     }
 `;
 
-export const H2 = styled(Font)
-`
+export const H2 = styled(Font)`
     font-size: ${props => props.theme.fontSize.h2};
     line-height: ${props => props.theme.fontSize.h2};
     margin-top: ${props => props.theme.fontSize.h2};
@@ -91,8 +103,7 @@ export const H2 = styled(Font)
     }
 `;
 
-export const H3 = styled(Font)
-`
+export const H3 = styled(Font)`
     font-size: ${props => props.theme.fontSize.h3};
     margin-top: ${props => props.theme.fontSize.h3};
     margin-bottom: ${props => props.theme.fontSize.h3};
@@ -102,42 +113,36 @@ export const H3 = styled(Font)
     }
 `;
 
-export const H4 = styled(Font)
-`
+export const H4 = styled(Font)`
     font-size: ${props => props.theme.fontSize.h4};
-    margin-top: ${props => props.theme.fontSize.h4};
-    margin-bottom: ${props => props.theme.fontSize.h4};
     @media (max-width: ${props => props.theme.screenSize.tablet}) {
 		font-size: calc(${props => props.theme.fontSize.h4} - .5rem);
 		line-height: ${props => props.theme.fontSize.h4};
     }
 `;
 
-export const H5 = styled(Font)
-`
+export const H5 = styled(Font)`
     font-size: ${props => props.theme.fontSize.h5};
-    margin-top: ${props => props.theme.fontSize.h5};
-    margin-bottom: ${props => props.theme.fontSize.h5};
     @media (max-width: ${props => props.theme.screenSize.tablet}) {
-		font-size: calc(${props => props.theme.fontSize.h5} - .5rem);
-		line-height: ${props => props.theme.fontSize.h5};
+        font-size: calc(${props => props.theme.fontSize.h5} - .2rem);
+        line-height: calc(${props => props.theme.fontSize.h5} - .2rem);
+
     }
 `;
 
-export const H6 = styled(Font)
-`
+export const H6 = styled(Font)`
     font-size: ${props => props.theme.fontSize.h6};
-    margin-top: ${props => props.theme.fontSize.h6};
-    margin-bottom: ${props => props.theme.fontSize.h6};
+
+
     @media (max-width: ${props => props.theme.screenSize.tablet}) {
-      	line-height: ${props => props.theme.fontSize.h6};
+        font-size: calc(${props => props.theme.fontSize.h6} - .2rem);
+        line-height: calc(${props => props.theme.fontSize.h6} - .2rem);
+
     }
 `;
-export const SMALL = styled(Font)
-`
+export const SMALL = styled(Font)`
     font-size: ${props => props.theme.fontSizeSmall.h6};
-    margin-top: ${props => props.theme.fontSizeSmall.h6};
-    margin-bottom: ${props => props.theme.fontSizeSmall.h6};
+   
     @media (max-width: ${props => props.theme.screenSize.tablet}) {
       	line-height: ${props => props.theme.fontSizeSmall.h6};
     }

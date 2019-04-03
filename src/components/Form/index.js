@@ -1,9 +1,8 @@
 import React from 'react';
-import { H1, H4, H6, P } from 'components/Typography';
+import { H1, H6 } from 'components/Typography';
 import {Button} from 'components/Button';
 import styled from 'styled-components';
-import Input from 'components/Input';
-import Wrapper from 'components/Wrapper';
+
 
 
 const Container = styled.div`

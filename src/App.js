@@ -1,40 +1,35 @@
 import React, { Component } from 'react';
 import { createGlobalStyle } from "styled-components";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Switch, Router, Route } from "react-router-dom";
 import { ThemeProvider } from 'styled-components';
+import { history } from './history';
 import theme from './theme';
-
 import Ostotoimeksianto from './views/Ostotoimeksianto';
-import OmatToimeksiannot from './views/OmatToimeksiannot';
+import Toimeksiannot from './views/Toimeksiannot';
 import Haku from './views/Haku';
-
 import Home from './views/Home';
-
-import Nav from './components/Nav'
-
-import withFirebaseAuth from 'react-with-firebase-auth'
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
-import firebaseConfig from './firebaseConfig';
-
+import Item from './views/Item';
+import {Helmet} from "react-helmet";
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faTimes, faChevronUp, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faBars, faTimes)
-const firebaseApp = firebase.initializeApp(firebaseConfig);
+
+library.add(faBars, faTimes, faChevronUp, faChevronLeft)
 
 const GlobalStyle = createGlobalStyle`
     body, html {
         margin: 0px;
         padding: 0px;
-        max-width: 100%;
+        max-width: 100vw;
         // border: red solid 1px;
         // overflow-x: hidden;
-        
+    body {
+        background-color: #FBFBFD;
+
+    }
     }
     h1 {
-        margin: 0
+        unset: all
     }
 
     img {
@@ -58,6 +53,7 @@ const GlobalStyle = createGlobalStyle`
         all: unset;
     }
     a:hover {
+        cursor:pointer;
         all: unset;
     }
 `;
@@ -65,33 +61,29 @@ const GlobalStyle = createGlobalStyle`
 class App extends Component {
     
   render() {
-    const {
-        user,
-        signOut,
-        signInWithGoogle,
-      } = this.props;
+
     return (
         <ThemeProvider theme={theme}>
-            <Router>
-                
-                    <Route path="/" exact component={Home} user/>
-                    <Route path="/ostotoimeksianto/" component={Ostotoimeksianto} />
-                    <Route path="/omat-toimeksiannot/" component={OmatToimeksiannot} />
-                    <Route path="/haku/" component={Haku} />
-
+            <Router history={history}>
+                <Switch>
+                    <Route exact path="/"  component={Home} user/>
+                        <Route path="/ostotoimeksianto"  component={Ostotoimeksianto} />
+                        <Route path="/omat-toimeksiannot"  component={Toimeksiannot} />
+                        <Route path="/haku"  component={Haku} />
+                        <Route path="/:id" component={Item} />
+                </Switch>      
                 <GlobalStyle />
+                <Helmet>
+                    <meta property="og:title" content="European Travel Destinations" />
+                    <meta property="og:description" content="Offering tour packages for individuals or groups." />
+                    <meta property="og:image" content="https://www.sponda.fi/sites/default/files/styles/property_image_thumbnail/public/images/property/190_150820_Mannerheimintie2_006.jpg?itok=e5B13-sA" />
+                    <meta property="og:url" content="http://euro-travel-example.com/index.htm"/>
+            </Helmet>
             </Router>
         </ThemeProvider>
 
     );
   }
 }
-const firebaseAppAuth = firebaseApp.auth();
 
-const providers = {
-  googleProvider: new firebase.auth.GoogleAuthProvider(),
-};
-export default withFirebaseAuth({
-    providers,
-    firebaseAppAuth,
-  })(App);
+export default (App);
