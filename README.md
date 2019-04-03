@@ -5,7 +5,7 @@ This app is created to make selling apartments from the so-called silent markets
 
 ## What
 
-This app is coded with react, react-hooks, styled-components and uses the great pigeon-maps component with custom pin built on pigeon-marker library.
+This app is coded with react, react-hooks, styled-components, contentful and uses the great pigeon-maps component with custom pin built on pigeon-marker library.
 
 [pigeon-maps NPM](https://www.npmjs.com/package/pigeon-maps)
 
