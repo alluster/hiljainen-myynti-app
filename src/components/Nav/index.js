@@ -4,6 +4,8 @@ import { Row, Col } from 'react-flexbox-grid';
 import { H5 } from 'components/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link  from "components/LinkHOC";
+import LogoImage from './logo.png'
+
 
 const StyledRow = styled(Row)`
 	margin: 0px 0px 0px 0px !important; 
@@ -29,6 +31,7 @@ const MobileNav = styled.div `
 	@media (min-width: ${props => props.theme.screenSize.tablet}) {
 		display: none
 	};
+
 	${props => {
 		if (props.open) return css`
 			background-color: white;
@@ -58,6 +61,7 @@ const Navigation = styled.div`
 	margin-top: 0px !mportant;
 	height: 50px;
 	z-index: 1000;
+	margin-bottom: 80px;
 `;
 
 const NavLinkContainer = styled(Col)`
@@ -67,7 +71,7 @@ const NavLinkContainer = styled(Col)`
 	  `;
 	  
 const NavLink = styled(H5)`
-	font-size: 16px;
+	font-size: 20px;
 	text-align: center;
 	@media (max-width: ${props => props.theme.screenSize.tablet}) {
 		display: none
@@ -76,6 +80,9 @@ const NavLink = styled(H5)`
 const NavLinkMobile = styled(H5)`
 	line-height:90px;
 	padding: 0px;
+	:hover {
+		cursor: pointer
+	}
 	`;
 
 const IconContainer = styled(H5)`
@@ -91,14 +98,19 @@ const IconContainer = styled(H5)`
 	};
 	`;
 
-
+const Logo = styled.img`
+	width: 150px;
+	height: auto;
+	margin-top: 20px;
+	margin-left: 20px;
+`;
 const Hamburger = styled(Col)`
 	`;
 
-const Logo = styled(H5)`
-	line-height:20px;
+// const Logo = styled(H5)`
+// 	line-height:20px;
 
-	`;
+// 	`;
 
 const Nav = ({ transparent }) => {
 	const [toggle, setToggle]  = useState(false)
@@ -132,7 +144,7 @@ const Nav = ({ transparent }) => {
 				<Row>
 					<Col xs={10} sm={10} md={6} >
 						<Link to="/" >
-							<Logo bold>Hiljainenmyynti</Logo>
+							<Logo src={LogoImage}/>
 						</Link>
 					</Col>
 					{/* <NavLinkContainer  md={2}>

@@ -19,7 +19,7 @@ const  Image = styled.img`
     object-fit: cover;
     `;
 const  ImageBox = styled.div`
-    height: 300px;
+    height: auto;
     width: 100%;
 `;
 const ImageContainer = ({image, alt}) => 
@@ -75,7 +75,10 @@ const Item = (props) => {
         </Header>
         <Container>
         <Row>
-        <Col xs={12} sm={6} md={6} lg={6} >   
+            <Col xs={12} sm={12} md={12} lg={12} >   
+                    { data ? <ImageContainer image={data.fields.images[0].fields.file.url} alt="house"/> : null}  
+            </Col>
+            <Col xs={12} sm={6} md={6} lg={6} >   
                 { data ? <InfoBlock value_1="Rakennusvuosi" value_2={data.fields.buildYear} /> : null}  
                 { data ? <InfoBlock value_1="Pinta-ala" value_2={data.fields.squareMeters} /> : null}  
                 { data ? <InfoBlock value_1="Kerros" value_2={data.fields.floor} /> : null}  
@@ -88,9 +91,7 @@ const Item = (props) => {
                 { data ? <InfoBlock value_1="Omistajan puhelinnumero" value_2={data.fields.ownerPhone} /> : null}  
 
             </Col>
-            <Col xs={12} sm={12} md={12} lg={12} >   
-                { data ? <ImageContainer image={data.fields.images[0].fields.file.url} alt="house"/> : null}  
-            </Col>
+           
         </Row>
 
         </Container>

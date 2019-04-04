@@ -10,13 +10,13 @@ import { Row, Col } from 'react-flexbox-grid';
 import hideVirtualKeyboard from 'hide-virtual-keyboard';
 
 const Input = styled.input`
-		padding-top: 10px;
-		padding-bottom: 10px; 
-		width: 90%;
-		border: none;
-		font-size: 20px;
-		padding-left: 10%;
-		color: ${props => props.theme.colors.black};
+	padding-top: 10px;
+	padding-bottom: 10px; 
+	width: calc(100% - 20px);
+	border: none;
+	font-size: 20px;
+	padding-left: 20px;
+	color: ${props => props.theme.colors.black};
 		
 `;
 const Form = styled.form`
