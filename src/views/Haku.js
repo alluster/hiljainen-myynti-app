@@ -7,6 +7,7 @@ import Header from 'components/Header';
 import Locations from 'components/Map';
 import { Button } from 'components/Button';
 import { Row, Col } from 'react-flexbox-grid';
+import hideVirtualKeyboard from 'hide-virtual-keyboard';
 
 const Input = styled.input`
 		padding-top: 10px;
@@ -40,8 +41,7 @@ const Haku = ({ history }) => {
 
 	async function handleForm (evt) {
 		evt.preventDefault();
-		evt.target.blur()
-
+		hideVirtualKeyboard()
 		try { 
 			setAddress({address: localStorage.getItem('address')})
 			setAddress(address);
@@ -84,7 +84,7 @@ const Haku = ({ history }) => {
 					<Form action="" onSubmit={handleForm}>
 						<Row>
 							<Col xs={12} sm={12} md={12} lg={6} >
-								<Input placeholder="Hae" type="text"  onChange={ e => setAddress(e.target.value) }/>
+								<Input placeholder="Syötä hakusanoja" type="text"  onChange={ e => setAddress(e.target.value) }/>
 							</Col>
 							<Col  lgOffset={2} xs={12} sm={12} md={12} lg={4} >
 								<SearchButton type="submit" primary>Hae</SearchButton>
