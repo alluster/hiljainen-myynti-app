@@ -15,7 +15,7 @@ const Input = (props) =>
 		<Text>
 			<H6>{props.fieldName}</H6>
 		</Text>
-		<InputField />
+		<InputField type={props.type} value={props.value} />
 	</div>
 
 export default Input;

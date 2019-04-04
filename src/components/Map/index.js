@@ -5,35 +5,37 @@ import Map from 'pigeon-maps'
 import Marker from './marker'
 import { getApartments } from '../../contentfulData';
 
-const Marked = styled(Marker) `
-    height: 20px;
-    width: 20px;
 
-`;
 const Mapped = styled(Map)`
     max-width: 100%
 
 `;
 
-const Locations = ({history}) => {
-    const [data, setData] = useState(null)
+const Locations = ({history, initialLat, initialLon}) => {
+    const [apartments, setData] = useState(null)
+
     useEffect( () => {
          getApartments("apartment", (response) => {
-            setData(response)
+            setData(response);
         })
     }, []);
+    
         return (
-            <Mapped  center={[60.192059, 24.945831]} zoom={12}  height={400}>
+            <div>
+
+                <Mapped  center={[initialLat, initialLon]} zoom={15}  height={400}>
                 {
-                    data ? data.items.map((item, i) => {
-                            console.log(item)
+                    apartments ? apartments.items.map((item, i) => {
                             return (
                                 <Marker key={i} anchor={[item.fields.address.lat, item.fields.address.lon]} onClick={() => history.push(`${item.sys.id}`)} />
                             )
                     }) 
                     : null 
-                }  
+                } 
             </Mapped>
+
+                   </div>
+
         )
 }
  
