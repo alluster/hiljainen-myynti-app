@@ -11,10 +11,10 @@ import { Row, Col } from 'react-flexbox-grid';
 const Input = styled.input`
 		padding-top: 10px;
 		padding-bottom: 10px; 
-		min-width: 100%;
+		width: 100%;
 		font-size: 20px;
 		color: ${props => props.theme.colors.black};
-		padding-left: 20px;
+		
 `;
 const Form = styled.form`
 	margin-top: 20px;
@@ -23,6 +23,9 @@ const Form = styled.form`
 
 const SearchButton = styled(Button)`
 	min-width: 100%
+	@media (max-width: ${props => props.theme.screenSize.tablet}) {
+		display: none;
+	}
 `
 const Haku = ({ history }) => {
 	const initialAddress = "Maneesikatu";
@@ -35,11 +38,14 @@ const Haku = ({ history }) => {
 
 	async function handleForm (evt) {
 		evt.preventDefault();
+		evt.target.blur()
+
 		try { 
 			setAddress({address: localStorage.getItem('address')})
 			setAddress(address);
 			getCoordinates(address)
 			setAddress(initialAddress);
+
 		} 
 		catch (err) {
 				if(err) {
@@ -75,10 +81,10 @@ const Haku = ({ history }) => {
 				<Container>
 					<Form action="" onSubmit={handleForm}>
 						<Row>
-							<Col xs={6} sm={6} md={6} lg={6} >
+							<Col xs={12} sm={12} md={12} lg={6} >
 								<Input placeholder="Hae" type="text"  onChange={ e => setAddress(e.target.value) }/>
 							</Col>
-							<Col smOffset={2} mdOffset={2} lgOffset={2} xsOffset={2} xs={4} sm={4} md={4} lg={4} >
+							<Col mdOffset={2} lgOffset={2} xs={12} sm={12} md={12} lg={4} >
 								<SearchButton type="submit" primary>Hae</SearchButton>
 							</Col>
 						</Row>
