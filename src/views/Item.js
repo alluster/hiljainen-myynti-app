@@ -9,6 +9,7 @@ import Footer from 'components/Footer';
 import Header from 'components/Header';
 import { withRouter } from 'react-router';
 import { getApartment } from '../contentfulData';
+
 const Info = styled.div`
     margin-top: 30px;
 `;
@@ -38,16 +39,23 @@ const Icon = styled(FontAwesomeIcon)`
 
 const Item = (props) => {
     const [data, setData] = useState(null)
+    const [addressFromItem, setAddress] = useState("kalevankatu")
     useEffect( () => {
          getApartment(props.match.params.id, (response) => {
             setData(response)
+            setAddress(response.fields.streetAddress)
+            localStorage.setItem('address', response.fields.streetAddress);
         })
     }, []);
-    console.log(data)
+
+    
+
     return (
         <div>
         <Nav transparent/>  
         <Header >
+ {       console.log(addressFromItem)
+}
             <Row>
                 <Col xs={2} >
                     <Icon icon="chevron-left" onClick={ () => props.history.goBack()}/>

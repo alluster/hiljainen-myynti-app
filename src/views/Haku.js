@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Nav from 'components/Nav';
 import Container from 'components/Container';
 import Footer from 'components/Footer';
@@ -7,18 +7,21 @@ import Locations from 'components/Map';
 import { Button } from 'components/Button';
 
 const Haku = ({ history }) => {
-	const initialAddress = "Hae";
+	const initialAddress = "Maneesikatu";
 	const [address, setAddress] = useState(initialAddress);
 	const [lat, setLat] = useState(null)
 	const [lon, setLon] = useState(null)
+	useEffect( () => {
+			getCoordinates(localStorage.getItem('address'))
+   }, []);
 
 	async function handleForm (evt) {
 		evt.preventDefault();
-		try { alert(`Haetaan osoitteella: ${address}`)
-		setAddress(address);
-
-			getCoordinates(address)
+		try { 
+			setAddress({address: localStorage.getItem('address')})
 			setAddress(address);
+			getCoordinates(address)
+			setAddress(initialAddress);
 		} 
 		catch (err) {
 				if(err) {
@@ -26,6 +29,8 @@ const Haku = ({ history }) => {
 				}
 		}	
 	}
+	console.log(localStorage.getItem('address'))
+
 	async function getCoordinates(address) {
 		try {
 			const response = await fetch(
@@ -35,7 +40,6 @@ const Haku = ({ history }) => {
 		  const data = await response.json();
 		  setLat(data.results[0].geometry.lat);
 		  setLon(data.results[0].geometry.lng);
-		  console.log(data.results[0].geometry)
 
 		} 
 		catch (err) {
@@ -43,20 +47,16 @@ const Haku = ({ history }) => {
 		  }
 
 		}
-		alert(`Koordinaatit: ${lat} ${lon}`)
 
 	  }
 		
 	
 	return (
 		<div>
-			{console.log(lat)}
-			{console.log(lon)}
-
 		<Nav transparent/>  
 			<Header >
 				<form action="" onSubmit={handleForm}>
-					<input type="text" value={address} onChange={ e => setAddress(e.target.value) }/>
+					<input placeholder="Hae" type="text"  onChange={ e => setAddress(e.target.value) }/>
 					<Button  type="submit" primary>Hae</Button>
 				</form>
 			</Header>

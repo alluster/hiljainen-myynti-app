@@ -13,7 +13,7 @@ const Mapped = styled(Map)`
 
 const Locations = ({history, initialLat, initialLon}) => {
     const [apartments, setData] = useState(null)
-
+    
     useEffect( () => {
          getApartments("apartment", (response) => {
             setData(response);
