@@ -11,8 +11,10 @@ import { Row, Col } from 'react-flexbox-grid';
 const Input = styled.input`
 		padding-top: 10px;
 		padding-bottom: 10px; 
-		width: 100%;
+		width: 90%;
+		border: none;
 		font-size: 20px;
+		padding-left: 10%;
 		color: ${props => props.theme.colors.black};
 		
 `;
@@ -23,7 +25,7 @@ const Form = styled.form`
 
 const SearchButton = styled(Button)`
 	min-width: 100%
-	@media (max-width: ${props => props.theme.screenSize.tablet}) {
+	@media (max-width: ${props => props.theme.screenSize.laptop}) {
 		display: none;
 	}
 `
@@ -84,7 +86,7 @@ const Haku = ({ history }) => {
 							<Col xs={12} sm={12} md={12} lg={6} >
 								<Input placeholder="Hae" type="text"  onChange={ e => setAddress(e.target.value) }/>
 							</Col>
-							<Col mdOffset={2} lgOffset={2} xs={12} sm={12} md={12} lg={4} >
+							<Col  lgOffset={2} xs={12} sm={12} md={12} lg={4} >
 								<SearchButton type="submit" primary>Hae</SearchButton>
 							</Col>
 						</Row>
