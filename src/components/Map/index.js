@@ -7,9 +7,11 @@ import { getApartments } from '../../contentfulData';
 
 
 const Mapped = styled(Map)`
-    max-width: 100%
+    min-width: 100%
+    height: 100px;
 
 `;
+
 
 const Locations = ({history, initialLat, initialLon}) => {
     const [apartments, setData] = useState(null)
@@ -22,8 +24,7 @@ const Locations = ({history, initialLat, initialLon}) => {
     
         return (
             <div>
-
-                <Mapped  center={[initialLat, initialLon]} zoom={15}  height={400}>
+                <Mapped  center={[initialLat, initialLon]} zoom={15} height="100vh"  >
                 {
                     apartments ? apartments.items.map((item, i) => {
                             return (
@@ -32,9 +33,8 @@ const Locations = ({history, initialLat, initialLon}) => {
                     }) 
                     : null 
                 } 
-            </Mapped>
-
-                   </div>
+                </Mapped>
+            </div>
 
         )
 }

@@ -30,6 +30,17 @@ const SearchButton = styled(Button)`
 		display: none;
 	}
 `
+
+const Maps = styled(Locations)`
+	margin-top: 0;
+	position: absolute;
+`;
+
+const MapContainer = styled.div`
+	position: absolute !important;
+	margin-top: 0;
+	z-index: 10000;
+`;
 const Haku = ({ history }) => {
 	const initialAddress = "Maneesikatu";
 	const [address, setAddress] = useState(initialAddress);
@@ -46,7 +57,6 @@ const Haku = ({ history }) => {
 			setAddress({address: localStorage.getItem('address')})
 			setAddress(address);
 			getCoordinates(address)
-			setAddress(initialAddress);
 
 		} 
 		catch (err) {
@@ -84,18 +94,43 @@ const Haku = ({ history }) => {
 					<Form action="" onSubmit={handleForm}>
 						<Row>
 							<Col xs={12} sm={12} md={12} lg={6} >
-								<Input placeholder="Syötä hakusanoja" type="text"  onChange={ e => setAddress(e.target.value) }/>
+								<Input 
+									placeholder="Syötä hakusanoja" 
+									type="text"  
+									onChange={ e => setAddress(e.target.value) }
+								/>
 							</Col>
-							<Col  lgOffset={2} xs={12} sm={12} md={12} lg={4} >
-								<SearchButton type="submit" primary>Hae</SearchButton>
+							<Col  
+								lgOffset={2} 
+								xs={12} sm={12}
+								md={12} lg={4} 
+								>
+								<SearchButton
+									type="submit" 
+									primary
+								>
+									Hae
+								</SearchButton>
 							</Col>
 						</Row>
 					</Form>
 				</Container>
 				
-			<Container>
-				<Locations initialLat={lat} initialLon={lon} history={history}/>
-			</Container>
+	
+	
+					<Maps 
+						twoFingerDrag={true}
+						twoFingerDragWarning={true}  
+						metaWheelZoomWarning={true} 
+						metaWheelZoom={true} 
+						initialLat={lat} 
+						initialLon={lon} 
+						history={history}
+					/>
+			
+
+	
+		
 			<Footer />
 		</div>
 	);
