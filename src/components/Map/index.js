@@ -24,7 +24,12 @@ const Locations = ({history, initialLat, initialLon}) => {
     
         return (
             <div>
-                <Mapped  center={[initialLat, initialLon]} zoom={15} height="100vh"  >
+                <Mapped  
+                    twoFingerDrag={true}
+                    metaWheelZoom={true} 
+                    center={[initialLat, initialLon]} 
+                    zoom={15} 
+                    height="100vh"  >
                 {
                     apartments ? apartments.items.map((item, i) => {
                             return (

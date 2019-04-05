@@ -119,10 +119,6 @@ const Haku = ({ history }) => {
 	
 	
 					<Maps 
-						twoFingerDrag={true}
-						twoFingerDragWarning={true}  
-						metaWheelZoomWarning={true} 
-						metaWheelZoom={true} 
 						initialLat={lat} 
 						initialLon={lon} 
 						history={history}
