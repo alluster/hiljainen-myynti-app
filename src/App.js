@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { createGlobalStyle } from "styled-components";
 import { Switch, Router, Route } from "react-router-dom";
 import { ThemeProvider } from 'styled-components';
@@ -12,7 +12,7 @@ import Item from './views/Item';
 import {Helmet} from "react-helmet";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faBars, faTimes, faChevronUp, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
-
+import { checkLogin } from './keycloak';
 
 library.add(faBars, faTimes, faChevronUp, faChevronLeft)
 
@@ -59,9 +59,11 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 class App extends Component {
+    componentDidMount(){
+        checkLogin()
+    }
     
   render() {
-
     return (
         <ThemeProvider theme={theme}>
             <Router history={history}>

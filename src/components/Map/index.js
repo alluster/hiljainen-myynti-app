@@ -9,7 +9,6 @@ import { getApartments } from '../../contentfulData';
 const Mapped = styled(Map)`
     min-width: 100%
     height: 100px;
-
 `;
 
 

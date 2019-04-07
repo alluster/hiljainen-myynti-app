@@ -18,7 +18,6 @@ const StyledCol = styled(Col)`
 `;
 const MobileNav = styled.div `
 	margin-top: auto;
-	margin-bottom: auto;
 	background-color: white;
 	z-index: 100000;
 	height: 100%;
@@ -43,6 +42,11 @@ const MobileNav = styled.div `
 	`;
 
 const Navigation = styled.div`
+${props => {
+	if (props.absolute) return css`
+		position: absolute !important;
+	`;
+}};
 	${props => {
 		if (props.transparent) return css`
 			background-color: transparent;
@@ -56,12 +60,15 @@ const Navigation = styled.div`
 			display: none;
 		`;
 	}};
+	
 	top; 0;
 	padding: 20px;
 	margin-top: 0px !mportant;
 	height: 50px;
 	z-index: 1000;
-	margin-bottom: 80px;
+	@media (max-width: ${props => props.theme.screenSize.tablet}) {
+		height: 20px;
+	}
 `;
 
 const NavLinkContainer = styled(Col)`
@@ -93,7 +100,8 @@ const IconContainer = styled(H5)`
 		cursor: pointer
 	}
 	@media (max-width: ${props => props.theme.screenSize.tablet}) {
-		display: block
+		display: block;
+		margin-top: 5px;
 
 	};
 	`;
@@ -102,7 +110,11 @@ const Logo = styled.img`
 	width: 150px;
 	height: auto;
 	margin-top: 20px;
-	margin-left: 20px;
+	
+	@media (max-width: ${props => props.theme.screenSize.tablet}) {
+		margin-top: 5px;
+	}
+
 `;
 const Hamburger = styled(Col)`
 	`;
@@ -112,10 +124,10 @@ const Hamburger = styled(Col)`
 
 // 	`;
 
-const Nav = ({ transparent }) => {
+const Nav = ({ transparent, className }) => {
 	const [toggle, setToggle]  = useState(false)
   	return (
-		<div>
+		<div className={className} >
 			<MobileNav open={toggle}>
 				<StyledRow>
 					{/* <StyledCol onClick={ () => setToggle(!toggle)} xs={12}>
@@ -140,7 +152,7 @@ const Nav = ({ transparent }) => {
 					</StyledCol>
 				</StyledRow>
 			</MobileNav>
-			<Navigation transparent={transparent} open={toggle}>
+			<Navigation  transparent={transparent} open={toggle}>
 				<Row>
 					<Col xs={10} sm={10} md={6} >
 						<Link to="/" >

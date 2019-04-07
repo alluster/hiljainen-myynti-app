@@ -6,9 +6,8 @@ const Home = () => {
 
   return (
     <div>
-
-    <Nav transparent />  
-    <Hero />
+      <Nav transparent />  
+      <Hero />
     </div>
 
   

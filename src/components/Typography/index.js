@@ -102,7 +102,6 @@ export const H2 = styled(Font)`
       line-height: 1;
     }
 `;
-
 export const H3 = styled(Font)`
     font-size: ${props => props.theme.fontSize.h3};
     margin-top: ${props => props.theme.fontSize.h3};

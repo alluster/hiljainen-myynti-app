@@ -1,7 +1,9 @@
 import React from 'react';
-import { H1, H6 } from 'components/Typography';
+import { H1, H3, H4, H6 } from 'components/Typography';
 import {Button} from 'components/Button';
 import styled from 'styled-components';
+
+import { Register, Login } from '../../keycloak';
 
 
 
@@ -32,9 +34,12 @@ const Form = () =>
 <div>
   <Container>
     <H1>Löydä hiljaiset myyntikohteet</H1>
-    <InputHero  fieldName="Email address" placeholder="Anna sähköpostiosoitteesi" />
-    <Button primary>Rekisteröidy</Button>
-        <H6>Asunnonvälittäjän työkalu hiljaisten myyntikohteiden löytämiseen</H6>
+    <H3>Asunnonvälittäjän työkalu hiljaisten myyntikohteiden löytämiseen</H3>
+
+    {/* <InputHero  fieldName="Email address" placeholder="Anna sähköpostiosoitteesi" /> */}
+    <Button primary onClick={() => Register()}>Rekisteröidy</Button>
+    <H6>Tai</H6>
+    <H6 bold underline secondary onClick={() => Login()}>Kirjaudu sisään</H6>
 
   </Container>
 

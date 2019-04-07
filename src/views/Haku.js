@@ -22,6 +22,9 @@ const Input = styled.input`
 const Form = styled.form`
 	margin-top: 20px;
 	margin-bottom: 20px;
+	position: absolute;
+	z-index: 10000;
+	width: 80%;
 `;
 
 const SearchButton = styled(Button)`
@@ -36,11 +39,7 @@ const Maps = styled(Locations)`
 	position: absolute;
 `;
 
-const MapContainer = styled.div`
-	position: absolute !important;
-	margin-top: 0;
-	z-index: 10000;
-`;
+
 const Haku = ({ history }) => {
 	const initialAddress = "Maneesikatu";
 	const [address, setAddress] = useState(initialAddress);

@@ -15,6 +15,7 @@
     "google-map-react": "^1.1.2",
     "hide-virtual-keyboard": "^1.0.1",
     "history": "^4.8.0",
+    "keycloak-js": "^5.0.0",
     "metascraper": "^5.1.0",
     "npm": "^6.9.0",
     "pigeon-maps": "^0.12.1",
