@@ -27,7 +27,7 @@ const Locations = ({history, initialLat, initialLon}) => {
                 <Mapped  
                     twoFingerDrag={true}
                     metaWheelZoom={true} 
-                    defaultHeight={true}
+                    defaultHeight
                     center={[initialLat, initialLon]} 
                     zoom={15} 
                       >
