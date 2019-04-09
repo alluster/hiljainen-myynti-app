@@ -8,6 +8,7 @@ import Locations from 'components/Map';
 import { Button } from 'components/Button';
 import { Row, Col } from 'react-flexbox-grid';
 import hideVirtualKeyboard from 'hide-virtual-keyboard';
+// import { getDataFromDb } from './../requests.js';
 
 const Input = styled.input`
 	padding-top: 10px;
@@ -45,8 +46,10 @@ const Haku = ({ history }) => {
 	const [address, setAddress] = useState(initialAddress);
 	const [lat, setLat] = useState(null)
 	const [lon, setLon] = useState(null)
+	// const [response, getDataFromDb] = useState('mo')
 	useEffect( () => {
 			getCoordinates(localStorage.getItem('address'))
+
    }, []);
 
 	async function handleForm (evt) {
@@ -64,7 +67,6 @@ const Haku = ({ history }) => {
 				}
 		}	
 	}
-	console.log(localStorage.getItem('address'))
 
 	async function getCoordinates(address) {
 		try {

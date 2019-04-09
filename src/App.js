@@ -11,10 +11,13 @@ import Home from './views/Home';
 import Item from './views/Item';
 import {Helmet} from "react-helmet";
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faBars, faTimes, faChevronUp, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faTimes, faChevronUp, faChevronLeft, faUser } from '@fortawesome/free-solid-svg-icons'
 import { checkLogin } from './keycloak';
+import { getDataFromDb } from './requests';
+import { connect } from 'react-redux';
+import { simpleAction } from './actions/actions';
 
-library.add(faBars, faTimes, faChevronUp, faChevronLeft)
+library.add(faBars, faTimes, faChevronUp, faChevronLeft, faUser)
 
 const GlobalStyle = createGlobalStyle`
     body, html {
@@ -61,31 +64,40 @@ const GlobalStyle = createGlobalStyle`
 class App extends Component {
     componentDidMount(){
         checkLogin()
+       getDataFromDb()
     }
-    
+
   render() {
     return (
-        <ThemeProvider theme={theme}>
-            <Router history={history}>
-                <Switch>
-                    <Route exact path="/"  component={Home} user/>
-                        <Route path="/ostotoimeksianto"  component={Ostotoimeksianto} />
-                        <Route path="/omat-toimeksiannot"  component={Toimeksiannot} />
-                        <Route path="/haku"  component={Haku} />
-                        <Route path="/:id" component={Item} />
-                </Switch>      
-                <GlobalStyle />
-                <Helmet>
-                    <meta property="og:title" content="European Travel Destinations" />
-                    <meta property="og:description" content="Offering tour packages for individuals or groups." />
-                    <meta property="og:image" content="https://www.sponda.fi/sites/default/files/styles/property_image_thumbnail/public/images/property/190_150820_Mannerheimintie2_006.jpg?itok=e5B13-sA" />
-                    <meta property="og:url" content="http://euro-travel-example.com/index.htm"/>
-            </Helmet>
-            </Router>
-        </ThemeProvider>
+        
+            <ThemeProvider theme={theme}>
 
+                <Router history={history}>
+                    <Switch>
+                        <Route exact path="/"  component={Home} user/>
+                            <Route path="/ostotoimeksianto"  component={Ostotoimeksianto} />
+                            <Route path="/omat-toimeksiannot"  component={Toimeksiannot} />
+                            <Route path="/haku"  component={Haku} />
+                            <Route path="/:id" component={Item} />
+                    </Switch>      
+                    <GlobalStyle />
+                    <Helmet>
+                        <meta property="og:title" content="European Travel Destinations" />
+                        <meta property="og:description" content="Offering tour packages for individuals or groups." />
+                        <meta property="og:image" content="https://www.sponda.fi/sites/default/files/styles/property_image_thumbnail/public/images/property/190_150820_Mannerheimintie2_006.jpg?itok=e5B13-sA" />
+                        <meta property="og:url" content="http://euro-travel-example.com/index.htm"/>
+                </Helmet>
+                </Router>
+            </ThemeProvider>
     );
   }
 }
+const mapStateToProps = state => ({
+    ...state
+})
 
-export default (App);
+const mapDispatchToProps = dispatch => ({
+    simpleAction: () => dispatch(simpleAction())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

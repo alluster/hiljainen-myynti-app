@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { H5 } from 'components/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from "react-router-dom";
-import { Row, Col } from 'react-styled-flexboxgrid';
+import { Row, Col } from 'react-flexbox-grid';
 import { Button } from 'components/Button';
 
 const AccordionContainer = styled.div `

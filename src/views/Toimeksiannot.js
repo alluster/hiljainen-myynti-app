@@ -18,7 +18,7 @@ const [data, setData] = useState(null)
 		<div>
 			<Nav transparent/>  
 			<Container>
-				<H1>Toimeksiannot</H1>
+				<H1>Kaikki kohteet</H1>
 				{
 					data ? data.items.map((item, i) => {
 							console.log(item)

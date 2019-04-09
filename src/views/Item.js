@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Row, Col } from 'react-styled-flexboxgrid';
+import { Row, Col } from 'react-flexbox-grid';
 import { H6, H5, H4, H3 } from 'components/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Nav from 'components/Nav';

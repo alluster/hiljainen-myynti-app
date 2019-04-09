@@ -8,9 +8,10 @@ import { getApartments } from '../../contentfulData';
 
 const Mapped = styled(Map)`
     min-width: 100%
-    height: 100px;
 `;
-
+const Container = styled.div`
+    height: 100Vh;
+`;
 
 const Locations = ({history, initialLat, initialLon}) => {
     const [apartments, setData] = useState(null)
@@ -22,13 +23,14 @@ const Locations = ({history, initialLat, initialLon}) => {
     }, []);
     
         return (
-            <div>
+            <Container>
                 <Mapped  
                     twoFingerDrag={true}
                     metaWheelZoom={true} 
+                    defaultHeight={true}
                     center={[initialLat, initialLon]} 
                     zoom={15} 
-                    height="100vh"  >
+                      >
                 {
                     apartments ? apartments.items.map((item, i) => {
                             return (
@@ -38,7 +40,7 @@ const Locations = ({history, initialLat, initialLon}) => {
                     : null 
                 } 
                 </Mapped>
-            </div>
+            </Container>
 
         )
 }

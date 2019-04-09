@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { Row, Col } from 'react-flexbox-grid';
 import { H5 } from 'components/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link  from "components/LinkHOC";
 import LogoImage from './logo.png'
-
+import { Logout, Login, keycloak } from '../../keycloak';
 
 const StyledRow = styled(Row)`
 	margin: 0px 0px 0px 0px !important; 
@@ -119,22 +119,18 @@ const Logo = styled.img`
 const Hamburger = styled(Col)`
 	`;
 
-// const Logo = styled(H5)`
-// 	line-height:20px;
-
-// 	`;
 
 const Nav = ({ transparent, className }) => {
 	const [toggle, setToggle]  = useState(false)
-  	return (
+	const [auth, setAuth] = useState(false)
+	useEffect( () => {
+			setAuth(sessionStorage.getItem('authenticated'))
+	}, []);  	
+
+	return (
 		<div className={className} >
 			<MobileNav open={toggle}>
 				<StyledRow>
-					{/* <StyledCol onClick={ () => setToggle(!toggle)} xs={12}>
-						<Link to="ostotoimeksianto">
-							<NavLinkMobile>Ostotoimeksianto </NavLinkMobile>
-						</Link>
-					</StyledCol> */}
 					<StyledCol onClick={ () => setToggle(!toggle)} xs={12}>
 						<Link to="haku">
 							<NavLinkMobile>Haku</NavLinkMobile>
@@ -142,19 +138,33 @@ const Nav = ({ transparent, className }) => {
 					</StyledCol>
 					<StyledCol onClick={ () => setToggle(!toggle)} xs={12}>
 						<Link to="omat-toimeksiannot">
-							<NavLinkMobile>Omat toimeksiannot</NavLinkMobile>
+							<NavLinkMobile>Kohteet</NavLinkMobile>
 						</Link>
 					</StyledCol>
 					<StyledCol onClick={ () => setToggle(!toggle)} xs={12}>
+						<Link to="ostotoimeksianto">
+							<NavLinkMobile>Luo toimeksianto</NavLinkMobile>
+						</Link>
+					</StyledCol>
+					{
+						sessionStorage.getItem('authenticated') === true ? 
+						<StyledCol onClick={() => Logout()} xs={12}>
+						<Link>
+							<NavLinkMobile >Kirjaudu ulos</NavLinkMobile>
+							</Link>
+						</StyledCol> : 
 						
-							<NavLinkMobile bold>Sulje <FontAwesomeIcon icon="times"/></NavLinkMobile>
-			
+						''
+					}
+					
+					<StyledCol onClick={ () => setToggle(!toggle)} xs={12}>
+						<NavLinkMobile bold>Sulje <FontAwesomeIcon icon="times"/></NavLinkMobile>
 					</StyledCol>
 				</StyledRow>
 			</MobileNav>
 			<Navigation  transparent={transparent} open={toggle}>
 				<Row>
-					<Col xs={10} sm={10} md={6} >
+					<Col xs={7} sm={3} md={3} >
 						<Link to="/" >
 							<Logo src={LogoImage}/>
 						</Link>
@@ -166,14 +176,26 @@ const Nav = ({ transparent, className }) => {
 						<Link to="haku"><NavLink>Haku</NavLink></Link>
 					</NavLinkContainer>
 					<NavLinkContainer  md={2}>
-						<Link to="omat-toimeksiannot"><NavLink>Toimeksiannot</NavLink></Link>
+						<Link to="omat-toimeksiannot"><NavLink>Kohteet</NavLink></Link>
 					</NavLinkContainer>
-						<Hamburger xs={2} sm={2} md={6}  open={toggle}>
-							<IconContainer right>
-								<FontAwesomeIcon icon="bars" onClick={ () => setToggle(!toggle)}/>
-							</IconContainer>
-						</Hamburger>
-			
+					<NavLinkContainer  md={3}>
+						<Link to="ostotoimeksianto"><NavLink>Luo toimeksianto</NavLink></Link>
+					</NavLinkContainer>
+					{
+						auth ? 
+							<NavLinkContainer  md={2}>
+							<Link>
+
+								<NavLink onClick={() => Logout()}>Kirjaudu ulos</NavLink>
+							</Link>
+							</NavLinkContainer> : 
+							''
+					}
+					<Hamburger xs={5} sm={9} md={9}  open={toggle}>
+						<IconContainer right>
+							<FontAwesomeIcon icon="bars" onClick={ () => setToggle(!toggle)}/>
+						</IconContainer>
+					</Hamburger>
 				</Row>
 			</Navigation>
 		</div>

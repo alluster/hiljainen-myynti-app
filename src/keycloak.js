@@ -1,6 +1,6 @@
 import Keycloak from 'keycloak-js';
 
-const keycloak = Keycloak({
+export const keycloak = Keycloak({
     url: 'https://keycloak-server.herokuapp.com/auth/',
     realm: 'hiljainen-myynti-app',
     clientId: 'login-app',
@@ -12,12 +12,11 @@ const keycloak = Keycloak({
 
 export function checkLogin() { keycloak.init({ onLoad: 'check-sso', checkLoginIframeInterval: 1 }).success(authenticated => {
     if (keycloak.authenticated) {
-      sessionStorage.setItem('kctoken', keycloak.token);
-      sessionStorage.setItem('authenticated', true);
+      localStorage.setItem('kctoken', keycloak.token);
+      localStorage.setItem('authenticated', true);
       setInterval(() => {
         keycloak.updateToken(10).error(() => keycloak.logout());
-        sessionStorage.setItem('kctoken', keycloak.token);
-        sessionStorage.setItem('authenticated', true);
+        localStorage.setItem('kctoken', keycloak.token);
       }, 10000);
       } else {
         // keycloak.login();
@@ -32,7 +31,7 @@ export function Login() {
 
 export function Logout() {
     keycloak.logout()
-    sessionStorage.setItem('authenticated', false);
+    localStorage.setItem('authenticated', false);
     alert("Logged Out");
 }
 
